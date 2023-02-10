@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NODE_ENV = process.env.NODE_ENV;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const setPath = function (folderName) {
     return path.join(__dirname, folderName);
@@ -46,6 +47,9 @@ const config = {
         historyApiFallback: true,
         noInfo: false
     },
+    resolve: {
+        extensions: ['.ts', '.js', '.json']
+    },
     plugins: [
         extractHTML,
         new MiniCssExtractPlugin({
@@ -59,7 +63,19 @@ const config = {
                 isStaging: (NODE_ENV === 'development' || NODE_ENV === 'staging'),
                 NODE_ENV: '"' + NODE_ENV + '"'
             }
-        })
+        }),
+        new CopyWebpackPlugin(
+            [
+                {
+                    from: './src/icons',
+                    to: 'assets/icons'
+                },
+                {
+                    from: './src/data',
+                    to: 'data/accounts.json'
+                }
+            ]
+        ),
     ],
     module: {
         rules: [
@@ -75,6 +91,11 @@ const config = {
                         js: 'babel-loader'
                     }
                 }
+            },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                loader: 'ts-loader'
             },
             {
                 test: /\.js$/,
