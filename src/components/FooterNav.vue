@@ -2,29 +2,36 @@
     <div class="footer-nav">
         <a href="" class="footer-nav__link">AccManager</a>
         <ul class="footer-nav__list">
-            <li class="footer-nav__list-item">
-                <a href="" class="footer-nav__link">Home</a>
-            </li>
-            <li class="footer-nav__list-item">
-                <a href="" class="footer-nav__link">About</a>
-            </li>
-            <li class="footer-nav__list-item">
-                <a href="" class="footer-nav__link">Contact</a>
-            </li>
-            <li class="footer-nav__list-item">
-                <a href="" class="footer-nav__link">Blog</a>
-            </li>
+            <LinkListItem 
+                v-for="(footerLink, index) in footerLinks"
+                :key="index"
+                className="footer-nav__list-item"
+                linkClassname="footer-nav__link"
+                :textContent="footerLink"
+            />
         </ul>
     </div>
 </template>
 
 <script>
+import LinkListItem from '../components/LinkListItem.vue';
+
 export default {
-    name: 'FooterNav'
+    name: 'FooterNav',
+
+    components: {
+        LinkListItem
+    },
+
+    data() {
+        return  {
+            footerLinks: ['Home', 'About', 'Contact', 'Blog']
+        }
+    }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../scss/styles.scss';
 
 .footer-nav {
@@ -37,10 +44,6 @@ export default {
         @include flex(row);
 
         list-style-type: none;
-    }
-
-    &__list-item {
-        margin-right: 1.5rem;
     }
 
     &__link {

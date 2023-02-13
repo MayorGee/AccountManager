@@ -1,8 +1,8 @@
 <template>
-    <div class="main-input" v-if="!hide">
+    <div class="input" v-if="!isHidden">
         <label 
             :for="inputFor" 
-            class="main-input__label"
+            class="input__label"
             v-if="label"
         >
             {{ label }}:
@@ -12,7 +12,7 @@
             :type="type" 
             id="for" 
             :name="name"
-            class="main-input__frame"
+            :class="computedClassName"
             :placeholder="placeholder"
             :value="value"
             @input="handleInput"
@@ -31,10 +31,10 @@ export default {
             type: String
         },
 
-        hide: {
-            default: false,
+        className: {
+            default: '',
             require: false,
-            type: Boolean
+            type: String
         },
         
         placeholder: {
@@ -53,6 +53,16 @@ export default {
         handleInput(ev) {
             this.$emit('input', ev.target.value)
         }
+    },
+
+    computed: {
+        computedClassName() {
+            return 'input__frame' + ' ' + this.className
+        },
+
+        isHidden() {
+            return this.className.includes('hide')
+        }
     }
 }
 </script>
@@ -60,7 +70,7 @@ export default {
 <style lang="scss">
 @import '../scss/styles.scss';
 
-.main-input {
+.input {
     &__frame {
         @include size(25rem, 4.5rem);
             

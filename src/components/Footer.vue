@@ -8,7 +8,7 @@
             distinctio odio consectetur vel, ut impedit nihil doloribus.
         </p>
         
-        <FooterIcons />
+        <SocialIcons />
         
         <FooterNav />
     </footer>
@@ -16,19 +16,19 @@
 
 <script>
 import FooterNav from '../components/FooterNav.vue';
-import FooterIcons from '../components/FooterIcons.vue';
+import SocialIcons from '../components/SocialIcons.vue';
 
 export default {
     name: 'Footer',
 
     components: {
         FooterNav,
-        FooterIcons
+        SocialIcons
     },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../scss/styles';
 
 .footer {
@@ -43,13 +43,6 @@ export default {
     &__description {
         width: 40%;
         margin: auto;
-    }
-
-    &__icon {
-        @include size(3.5rem, 3.5rem);
-        margin: 1rem;
-
-        border-radius: 50%;
     }
 }
 </style>
