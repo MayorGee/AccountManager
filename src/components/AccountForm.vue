@@ -73,11 +73,14 @@ export default {
     },
 
     methods: {
-        submit(accountFormKey, accountFormValue) {
+        submit(accountFormSubmitEvent, accountFormValue) {
+            console.log('key:', accountFormKey);
+            console.log('value:', accountFormValue);
+
             this.$emit(
                 'submit', 
                 tap(cloneDeep(this.accountFormData), 
-                v => set(v, accountFormKey, accountFormValue))
+                value => set(value, accountFormSubmitEvent, accountFormValue))
             );
 
             AccountModel.resetAccountFormData(this.accountFormData)
