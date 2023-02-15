@@ -5,8 +5,8 @@
             <LinkListItem 
                 v-for="(footerLink, index) in footerLinks"
                 :key="index"
-                className="footer-nav__list-item"
-                linkClassname="footer-nav__link"
+                class="footer-nav__list-item"
+                linkClass="footer-nav__link"
                 :textContent="footerLink"
             />
         </ul>

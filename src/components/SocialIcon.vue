@@ -1,12 +1,12 @@
 <template>
     <a 
         href="" 
-        class="social-link"
+        class="social-icon"
     >
         <img 
             :src="`assets/icons/${src}`" 
             :alt="alt"
-            class="social-icon" 
+            class="social-icon__img" 
         />
     </a>
 </template>
@@ -26,9 +26,11 @@ export default {
 @import '../scss/styles.scss';
 
 .social-icon {
-    @include size(3.5rem, 3.5rem);
-    margin: 1rem;
-
-    border-radius: 50%;
+    &__img {
+        @include size(3.5rem, 3.5rem);
+        margin: 1rem;
+    
+        border-radius: 50%;
+    }
 }
 </style>

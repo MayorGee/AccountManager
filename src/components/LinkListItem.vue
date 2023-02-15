@@ -1,8 +1,8 @@
 <template>
-    <li :class="`link-list__item ${className}`">
+    <li class="list-item">
         <a 
             :href="`${href}`" 
-            :class="`link-list__link ${linkClassname}`"
+            :class="`list-item__link ${linkClass}`"
         >
             {{ textContent }}
         </a>
@@ -14,13 +14,14 @@ export default {
     name: 'LinkListItem',
 
     props: {
-        className: String,
-        linkClassname: String,
+        linkClass: String,
+
         href: {
             default: '',
             require: false,
             type: String
         },
+
         textContent: {
             default: 'link',
             require: true,
@@ -33,11 +34,9 @@ export default {
 <style lang="scss">
 @import '../scss/styles.scss';
 
-.link-list {
-    &__item {
-        margin-right: 1.5rem;
-    }
-
+.list-item {
+    margin-right: 1.5rem;
+    
     &__link {
         @include text-format($color: $creamy-brown, $text-decoration: none);
     }

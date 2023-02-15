@@ -1,7 +1,7 @@
 <template>
     <form 
         class="account-form"
-        @submit.prevent="handleSubmit" 
+        @submit.prevent="submit" 
     >
         <p class="account-form__info">
             {{ info }}
@@ -11,45 +11,61 @@
             label="First Name"
             inputFor="account_first_name"
             name="firstName"
-            v-model="formValues.firstName"
+            v-model="accountFormData.firstName"
         />
 
         <Input 
             label="Last Name"
             inputFor="account_last_name"
             name="lastName"
-            v-model="formValues.lastName"
+            v-model="accountFormData.lastName"
         />
 
         <Input 
             label="Avatar"
             inputFor="account_avatar"
             name="avatar"
-            v-model="formValues.avatar"
+            v-model="accountFormData.avatar"
         />
 
         <Input 
             label="Tag"
             inputFor="account_tag"
             name="tag"
-            v-model="formValues.tag"
+            v-model="accountFormData.tag"
         />
                                  
         <button class="account-form__button">
-            Add Account
+            {{ btnText }}
         </button>
     </form>
 </template>
 
 <script>
+import { cloneDeep, tap, set } from 'lodash'
+
 import Input from '../components/Input.vue';
+import AccountModel from '../model/AccountModel';
 
 export default {
     name: 'AccountForm',
 
+    data() {
+        return {
+            accountFormData: {
+                id: '',
+                firstName: '',
+                lastName: '',
+                avatar: '',
+                tag: ''
+            }
+        }
+    },
+
     props: {
-       formValues: Object,
-       info: String
+        editAccountFormData: Object,
+        info: String,
+        btnText: String
     },
 
     components: {
@@ -57,8 +73,20 @@ export default {
     },
 
     methods: {
-        handleSubmit(event) {
-            this.$emit('submit', event)
+        submit(accountFormKey, accountFormValue) {
+            this.$emit(
+                'submit', 
+                tap(cloneDeep(this.accountFormData), 
+                v => set(v, accountFormKey, accountFormValue))
+            );
+
+            AccountModel.resetAccountFormData(this.accountFormData)
+        }
+    },
+
+    mounted() {
+        if (this.editAccountFormData) {
+            this.accountFormData = this.editAccountFormData
         }
     }
 }

@@ -1,13 +1,6 @@
 import { Account } from '../abstracts/common';
-import FetchClient from './FetchClient';
 
 export  default class AccountModel {
-    public static async getAccounts(): Promise<Account[]> {
-        const accounts = await FetchClient.get('http://localhost:3333/accounts') as unknown as Account[];
-
-        return accounts;
-    }
-
     public static getAccountFullname(account: Account): String {
         return account.firstName + ' ' + account.lastName;
     }
@@ -22,16 +15,14 @@ export  default class AccountModel {
     }
 
     public static filterAccountsByName(accounts: Account[], filter: string): Account[] {
-        return accounts.filter(account => {
-            const { firstName, lastName, tag } = account;
-
+        return accounts.filter(({ firstName, lastName }) => {
             return firstName.includes(filter) || lastName.includes(filter);
         });
     }
 
     public static filterAccountsByTag(accounts: Account[], tagFilter: string): Account[] {
-        return accounts.filter(account => {
-            return account.tag.includes(tagFilter);
+        return accounts.filter(({tag}) => {
+            return tag.includes(tagFilter);
         });
     }
 
@@ -43,20 +34,14 @@ export  default class AccountModel {
         accounts.push(newAccount);
     }
 
-    public static setFormValues(formValues: Account, account: Account) {
-        const { id, firstName, lastName, avatar, tag } = account;
-     
-        formValues.id = id;
-        formValues.firstName = firstName;
-        formValues.lastName = lastName;
-        formValues.avatar = avatar;
-        formValues.tag = tag;
+    public static addIdToAccount({ firstName, lastName, avatar, tag } : Account): Account {
+        const id = Date.now();
+        return { id, firstName, lastName, avatar, tag };
     }
 
-    public static createNewAccount(formValues: Account): Account {
-        const id = Date.now();
-        const { firstName, lastName, avatar, tag } = formValues;
-
-        return { id, firstName, lastName, avatar, tag };
+    public static resetAccountFormData(accountFormData: any) {
+        for (const property of Object.getOwnPropertyNames(accountFormData)) {
+            accountFormData[property] = '';
+        }
     }
 }

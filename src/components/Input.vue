@@ -1,5 +1,5 @@
 <template>
-    <div class="input" v-if="!isHidden">
+    <div class="input">
         <label 
             :for="inputFor" 
             class="input__label"
@@ -12,10 +12,10 @@
             :type="type" 
             id="for" 
             :name="name"
-            :class="computedClassName"
+            :class="`input__frame ${className}`"
             :placeholder="placeholder"
             :value="value"
-            @input="handleInput"
+            @input="input"
         />
     </div>
 </template>
@@ -50,18 +50,8 @@ export default {
     },
 
     methods: {
-        handleInput(ev) {
+        input(ev) {
             this.$emit('input', ev.target.value)
-        }
-    },
-
-    computed: {
-        computedClassName() {
-            return 'input__frame' + ' ' + this.className
-        },
-
-        isHidden() {
-            return this.className.includes('hide')
         }
     }
 }

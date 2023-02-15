@@ -13,9 +13,13 @@
                 >
                     None
                 </option>
-                <option value="Friend">Friend</option>
-                <option value="Relative">Relative</option>
-                <option value="Colleague">Colleague</option>
+                <option 
+                    v-for="(tagOption, index) in tagOptions"
+                    :key="index"
+                    value="tagOption"
+                >
+                    {{  tagOption }}
+                </option>
             </select>
             <Input 
                 inputFor="searchInput" 
@@ -25,30 +29,33 @@
             />
         </div>
 
-        <AccountsList 
+        <AccountList 
             :accounts="computedAccounts"
-            @edit-account="handleEditAccount"
-            @delete-account="handleDeleteAccount" /> 
+            @edit-account="editAccount"
+            @delete-account="deleteAccount" 
+        /> 
 
-        <div class="custom-wrapper">
+        <div class="accounts-form-wrapper">
             <AddAccountForm 
-                @submit-add-form="handleAddAccount"
+                @submit="addAccount"
             />
             <EditAccountForm 
-                :v-if="!isEditFormHidden"
-                :formValues="editFormValues"
-                @submit-edit-form="handleEditFormSubmit" 
+                v-if="!isEditFormHidden"
+                :accountFormData="editAccountFormData"
+                @submit="editFormSubmit" 
             />
         </div>
     </div>
 </template>
 
 <script>
-import AccountsList from './AccountsList.vue';
+import AccountList from './AccountList.vue';
 import Input from '../components/Input.vue';
-import AccountModel from '../script/AccountModel';
 import AddAccountForm from '../components/AddAccountForm.vue';
 import EditAccountForm from '../components/EditAccountForm.vue';
+
+import AccountModel from '../model/AccountModel';
+import AccountApi from '../model/AccountApi';
 
 export default {
     name: 'AccountsHandler',
@@ -64,39 +71,38 @@ export default {
                 default: true,
             },
             
-            editFormValues: {
-                id: '',
-                firstName: '',
-                lastName: '',
-                avatar: '',
-                tag: ''
-            }
+            editAccountFormData: {
+                type: Object,
+                default: {},
+            },
+
+            tagOptions: ['Friend', 'Relative', 'Colleague']
         }
     },
 
     components: {
-        AccountsList,
+        AccountList,
         Input,
         AddAccountForm,
         EditAccountForm
     },
 
     methods: {
-        handleEditAccount(accountToEdit) {
+        editAccount(accountToEdit) {
             this.isEditFormHidden = false;
 
-            AccountModel.setFormValues(this.editFormValues, accountToEdit);
+            this.editAccountFormData = accountToEdit;
         },
 
-        handleAddAccount(newAccount) {
+        addAccount(newAccount) {
             AccountModel.addAccount(this.accounts, newAccount);
         },
 
-        handleDeleteAccount(accountId) {
+        deleteAccount(accountId) {
             this.accounts = AccountModel.deleteAccount(this.accounts, accountId);
         },
 
-        handleEditFormSubmit(edittedAccount) {
+        editFormSubmit(edittedAccount) {
             this.isEditFormHidden = true;
 
             AccountModel.updateAccount(this.accounts, edittedAccount);
@@ -118,8 +124,8 @@ export default {
     },
 
     async created() {
-        this.accounts = await AccountModel.getAccounts();
-    }
+        this.accounts = await AccountApi.getAccounts();
+    },
 }
 </script>
 
@@ -169,7 +175,7 @@ export default {
     }
 }
 
-.custom-wrapper {
+.accounts-form-wrapper {
     @include flex($justify-content: space-evenly);
     @include size(100%);
 
