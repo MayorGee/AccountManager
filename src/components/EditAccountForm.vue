@@ -23,6 +23,8 @@ export default {
 
     methods: {
         editFormSubmit(submittedAccount) {
+            submittedAccount.id = this.accountFormData.id
+
             this.$emit('submit', submittedAccount)
         },
     }

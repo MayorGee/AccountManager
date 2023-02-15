@@ -5,7 +5,7 @@ export  default class AccountModel {
         return account.firstName + ' ' + account.lastName;
     }
 
-    public static findAccount(accounts: Account[], accountId: number) {
+    public static findAccount(accounts: Account[], accountId: string) {
         return accounts.find(account => account.id === accountId);         
     }
 
@@ -27,7 +27,7 @@ export  default class AccountModel {
     }
 
     public static deleteAccount(accounts: Account[], accountId: string): Account[] {
-        return accounts.filter(account => account.id !== +accountId);
+        return accounts.filter(account => account.id !== accountId);
     }
 
     public static addAccount(accounts: Account[], newAccount: Account) {
@@ -35,13 +35,20 @@ export  default class AccountModel {
     }
 
     public static addIdToAccount({ firstName, lastName, avatar, tag } : Account): Account {
-        const id = Date.now();
+        const id = Date.now().toString();
         return { id, firstName, lastName, avatar, tag };
     }
 
-    public static resetAccountFormData(accountFormData: any) {
-        for (const property of Object.getOwnPropertyNames(accountFormData)) {
-            accountFormData[property] = '';
+    public static resetAccountFormData(accountFormData: Account) {
+        for (let property in accountFormData) {
+            accountFormData[property as keyof Account] = '';
         }
+    }
+
+    public static getFormData(form: HTMLFormElement): Account {
+        //@ts-ignore
+        const formData = Object.fromEntries(new FormData(form)) as unknown as Account;
+        
+        return formData;
     }
 }

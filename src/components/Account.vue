@@ -6,20 +6,20 @@
             class="account__avatar"
         />
         <p class="account__fullname">
-            {{ getFullName(account) }}
+            {{ fullName }}
         </p>
         <span class="account__tag hide">
             {{ account.tag }}
         </span>
         <button
             class="account__edit-button"
-            @click="editAccount(account)"
+            @click="editAccount"
         >
             Edit
         </button>
         <button 
             class="account__delete-button"
-            @click="deleteAccount(account.id)"
+            @click="deleteAccount"
         >
             Delete
         </button>
@@ -41,19 +41,21 @@ export default {
     },
 
     methods: {
-        getFullName(account) {
-            return AccountModel.getAccountFullname(account)
+        editAccount() {
+            this.$emit('edit-account', this.account);
         },
 
-        editAccount(account) {
-            this.$parent.$emit('edit-account', account);
-        },
-
-        deleteAccount(accountId) {
+        deleteAccount() {
             if (confirm('Are you sure you want to delete this account?')) {
-                this.$parent.$emit('delete-account', accountId)
+                this.$emit('delete-account', this.account)
             }
         },
+    },
+
+    computed: {
+        fullName() {
+            return AccountModel.getAccountFullname(this.account)
+        }
     }
 }
 </script>

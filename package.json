@@ -69,7 +69,6 @@
     "webpack-serve": "^0.1.4"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
     "ts-loader": "^6.2.2",
     "typescript": "^4.5.5",
     "vue": "^2.5.17"

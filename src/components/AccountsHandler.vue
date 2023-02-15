@@ -98,8 +98,8 @@ export default {
             AccountModel.addAccount(this.accounts, newAccount);
         },
 
-        deleteAccount(accountId) {
-            this.accounts = AccountModel.deleteAccount(this.accounts, accountId);
+        deleteAccount(accountToDelete) {
+            this.accounts = AccountModel.deleteAccount(this.accounts, accountToDelete.id);
         },
 
         editFormSubmit(edittedAccount) {

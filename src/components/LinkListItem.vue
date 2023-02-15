@@ -1,7 +1,7 @@
 <template>
     <li class="list-item">
         <a 
-            :href="`${href}`" 
+            :href="href" 
             :class="`list-item__link ${linkClass}`"
         >
             {{ textContent }}

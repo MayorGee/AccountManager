@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import { cloneDeep, tap, set } from 'lodash'
-
 import Input from '../components/Input.vue';
 import AccountModel from '../model/AccountModel';
 
@@ -73,18 +71,12 @@ export default {
     },
 
     methods: {
-        submit(accountFormSubmitEvent, accountFormValue) {
-            console.log('key:', accountFormKey);
-            console.log('value:', accountFormValue);
-
-            this.$emit(
-                'submit', 
-                tap(cloneDeep(this.accountFormData), 
-                value => set(value, accountFormSubmitEvent, accountFormValue))
-            );
+        submit(event) {
+            this.accountFormData = AccountModel.getFormData(event.target);
+            this.$emit('submit', this.accountFormData);
 
             AccountModel.resetAccountFormData(this.accountFormData)
-        }
+        },
     },
 
     mounted() {
