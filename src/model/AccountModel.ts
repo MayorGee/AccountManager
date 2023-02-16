@@ -30,9 +30,9 @@ export  default class AccountModel {
         return { id, firstName, lastName, avatar, tag };
     }
 
-    public static resetAccountFormData(accountFormData: Account) {
-        for (let property in accountFormData) {
-            accountFormData[property as keyof Account] = '';
+    public static resetAccount(account: Account) {
+        for (let property in account) {
+            account[property as keyof Account] = '';
         }
     }
 

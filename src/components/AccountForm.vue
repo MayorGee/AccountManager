@@ -86,8 +86,6 @@ export default {
     methods: {
         submit() {
             this.$emit('submit', this.accountFormData);
-
-            AccountModel.resetAccountFormData(this.accountFormData)
         },
     },
 

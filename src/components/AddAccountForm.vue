@@ -20,6 +20,7 @@ export default {
     methods: {
         submit(submittedAccount) {
             const newAccount = AccountModel.addIdToAccount(submittedAccount)
+            AccountModel.resetAccount(submittedAccount)
             this.$emit('submit', newAccount);
         }
     }
