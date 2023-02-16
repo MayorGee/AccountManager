@@ -102,10 +102,8 @@ export default {
             this.accounts = AccountModel.deleteAccount(this.accounts, accountToDelete.id);
         },
 
-        editFormSubmit(edittedAccount) {
+        editFormSubmit() {
             this.isEditFormHidden = true;
-
-            AccountModel.updateAccount(this.accounts, edittedAccount);
         }
     },
 

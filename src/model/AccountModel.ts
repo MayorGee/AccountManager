@@ -5,15 +5,6 @@ export  default class AccountModel {
         return account.firstName + ' ' + account.lastName;
     }
 
-    public static findAccount(accounts: Account[], accountId: string) {
-        return accounts.find(account => account.id === accountId);         
-    }
-
-    public static updateAccount(accounts: Account[], edittedAccount: Account) {
-        const targetAccount = AccountModel.findAccount(accounts, edittedAccount.id) as Account;
-        Object.assign(targetAccount, edittedAccount);
-    }
-
     public static filterAccountsByName(accounts: Account[], filter: string): Account[] {
         return accounts.filter(({ firstName, lastName }) => {
             return firstName.includes(filter) || lastName.includes(filter);

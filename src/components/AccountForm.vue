@@ -34,6 +34,15 @@
             name="tag"
             v-model="accountFormData.tag"
         />
+
+        <Input 
+            v-if="!hideId"
+            type="hidden"
+            label="Id"
+            inputFor="account_id"
+            name="id"
+            v-model="accountFormData.id"
+        />
                                  
         <button class="account-form__button">
             {{ btnText }}
@@ -63,7 +72,11 @@ export default {
     props: {
         editAccountFormData: Object,
         info: String,
-        btnText: String
+        btnText: String,
+        hideId: {
+            type: Boolean,
+            default: true
+        }
     },
 
     components: {
@@ -71,8 +84,7 @@ export default {
     },
 
     methods: {
-        submit(event) {
-            this.accountFormData = AccountModel.getFormData(event.target);
+        submit() {
             this.$emit('submit', this.accountFormData);
 
             AccountModel.resetAccountFormData(this.accountFormData)
