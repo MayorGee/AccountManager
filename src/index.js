@@ -1,8 +1,10 @@
-import Vue from 'vue'
-import App from './pages/App.vue'
+import Vue from 'vue';
+import App from './pages/App.vue';
+import store from './store';
 
 new Vue({
-  el:'#app',
-  name: 'App',
-  render: h => h(App)
+    el:'#app',
+    name: 'App',
+    store,
+    render: h => h(App)
 })

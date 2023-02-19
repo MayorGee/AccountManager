@@ -42,12 +42,12 @@ export default {
 
     methods: {
         editAccount() {
-            this.$emit('edit-account', this.account);
+            this.$store.dispatch('editAccount', this.account)
         },
 
         deleteAccount() {
             if (confirm('Are you sure you want to delete this account?')) {
-                this.$emit('delete-account', this.account)
+                this.$store.dispatch('deleteAccount', this.account)
             }
         },
     },

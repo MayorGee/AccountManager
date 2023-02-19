@@ -13,18 +13,20 @@ import AccountForm from '../components/AccountForm.vue';
 export default {
     name: 'EditAccountForm',
 
-    props: {
-        accountFormData: Object
-    },
-
     components: {
         AccountForm
     },
 
     methods: {
-        editFormSubmit(submittedAccount) {
-            this.$emit('submit', submittedAccount)
+        editFormSubmit() {
+            this.$store.dispatch('hideEditAccountForm')
         },
+    },
+
+    computed: {
+        accountFormData() {
+            return this.$store.getters.getEditAccountFormData
+        }
     }
 }
 </script>

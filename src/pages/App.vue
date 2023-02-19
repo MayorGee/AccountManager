@@ -12,6 +12,10 @@
             AccountManager
         },
 
+        async created() {
+            this.$store.dispatch('loadAccounts');
+        },
     }
+
 </script>
 

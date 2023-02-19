@@ -1,9 +1,7 @@
 <template>
     <div>
         <Header />
-
         <AccountsHandler />
-
         <Footer />
     </div>
 </template>

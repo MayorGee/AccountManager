@@ -5,15 +5,20 @@ export  default class AccountModel {
         return account.firstName + ' ' + account.lastName;
     }
 
-    public static filterAccountsByName(accounts: Account[], filter: string): Account[] {
+    public static filterAccountsByName(accounts: Account[], namefilter: string): Account[] {
         return accounts.filter(({ firstName, lastName }) => {
-            return firstName.includes(filter) || lastName.includes(filter);
+            console.log('name -> ', firstName + ' ' + lastName);
+            console.log('nameFilter -> ', namefilter);
+            return firstName.includes(namefilter) || lastName.includes(namefilter);
         });
     }
 
     public static filterAccountsByTag(accounts: Account[], tagFilter: string): Account[] {
-        return accounts.filter(({tag}) => {
-            return tag.includes(tagFilter);
+        return accounts.filter(account => {
+            console.log('tag -> ', account.tag);
+            console.log('tagFilter -> ', tagFilter);
+
+            return account.tag.includes(tagFilter);
         });
     }
 
@@ -23,6 +28,17 @@ export  default class AccountModel {
 
     public static addAccount(accounts: Account[], newAccount: Account) {
         accounts.push(newAccount);
+    }
+
+    public static updateAccount(accounts: Account[], updatedAccount: Account) {
+        const accountIndex = this.getAccountIndex(accounts, updatedAccount);
+        accounts[accountIndex] = updatedAccount;
+    }
+
+    public static getAccountIndex(accounts: Account[], accountToFind: Account): number {
+        const accountIndex = accounts.findIndex(account => account.id === accountToFind.id);
+
+        return accountIndex;
     }
 
     public static addIdToAccount({ firstName, lastName, avatar, tag } : Account): Account {

@@ -16,7 +16,7 @@
                 <option 
                     v-for="(tagOption, index) in tagOptions"
                     :key="index"
-                    value="tagOption"
+                    :value="tagOption"
                 >
                     {{  tagOption }}
                 </option>
@@ -24,26 +24,14 @@
             <Input 
                 inputFor="searchInput" 
                 name="searchInput"
-                placeholder="Search by name, surname, or tag(s)"
+                placeholder="Search by name or surname"
                 v-model="accountsNameFilter"
             />
         </div>
-
-        <AccountList 
-            :accounts="computedAccounts"
-            @edit-account="editAccount"
-            @delete-account="deleteAccount" 
-        /> 
-
+        <AccountList :accounts="accounts" /> 
         <div class="accounts-form-wrapper">
-            <AddAccountForm 
-                @submit="addAccount"
-            />
-            <EditAccountForm 
-                v-if="!isEditFormHidden"
-                :accountFormData="editAccountFormData"
-                @submit="editFormSubmit" 
-            />
+            <AddAccountForm />
+            <EditAccountForm v-if="!isEditFormHidden" />
         </div>
     </div>
 </template>
@@ -53,29 +41,15 @@ import AccountList from './AccountList.vue';
 import Input from '../components/Input.vue';
 import AddAccountForm from '../components/AddAccountForm.vue';
 import EditAccountForm from '../components/EditAccountForm.vue';
-
 import AccountModel from '../model/AccountModel';
-import AccountApi from '../model/AccountApi';
 
 export default {
     name: 'AccountsHandler',
 
     data() {
-        return {
-            accounts: [],
+        return {            
             accountsNameFilter: '',
             accountsTagFilter: '',
-            
-            isEditFormHidden: {
-                type: Boolean,
-                default: true,
-            },
-            
-            editAccountFormData: {
-                type: Object,
-                default: {},
-            },
-
             tagOptions: ['Friend', 'Relative', 'Colleague']
         }
     },
@@ -87,43 +61,26 @@ export default {
         EditAccountForm
     },
 
-    methods: {
-        editAccount(accountToEdit) {
-            this.isEditFormHidden = false;
-
-            this.editAccountFormData = accountToEdit;
-        },
-
-        addAccount(newAccount) {
-            AccountModel.addAccount(this.accounts, newAccount);
-        },
-
-        deleteAccount(accountToDelete) {
-            this.accounts = AccountModel.deleteAccount(this.accounts, accountToDelete.id);
-        },
-
-        editFormSubmit() {
-            this.isEditFormHidden = true;
-        }
-    },
-
     computed: {
-        computedAccounts() {
+        accounts() {
+            const allAccounts = this.$store.getters.getAccounts;
+
             if (this.accountsNameFilter) {
-                return AccountModel.filterAccountsByName(this.accounts, this.accountsNameFilter);
+                return AccountModel.filterAccountsByName(allAccounts, this.accountsNameFilter);
             }
 
             if (this.accountsTagFilter) {
-                return AccountModel.filterAccountsByTag(this.accounts, this.accountsTagFilter);
+                return AccountModel.filterAccountsByTag(allAccounts, this.accountsTagFilter);
             }
 
-            return this.accounts;
-        }
-    },
+            return allAccounts;
+        },
 
-    async created() {
-        this.accounts = await AccountApi.getAccounts();
-    },
+        isEditFormHidden() {
+            return this.$store.state.isEditFormHidden
+        }
+    }
+
 }
 </script>
 
