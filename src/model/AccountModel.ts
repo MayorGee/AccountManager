@@ -7,17 +7,12 @@ export  default class AccountModel {
 
     public static filterAccountsByName(accounts: Account[], namefilter: string): Account[] {
         return accounts.filter(({ firstName, lastName }) => {
-            console.log('name -> ', firstName + ' ' + lastName);
-            console.log('nameFilter -> ', namefilter);
             return firstName.includes(namefilter) || lastName.includes(namefilter);
         });
     }
 
     public static filterAccountsByTag(accounts: Account[], tagFilter: string): Account[] {
         return accounts.filter(account => {
-            console.log('tag -> ', account.tag);
-            console.log('tagFilter -> ', tagFilter);
-
             return account.tag.includes(tagFilter);
         });
     }
