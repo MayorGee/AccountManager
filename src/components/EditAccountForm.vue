@@ -25,7 +25,7 @@ export default {
 
     computed: {
         accountFormData() {
-            return this.$store.getters.getEditAccountFormData
+            return this.$store.getters.editAccountFormData
         }
     }
 }

@@ -60,12 +60,12 @@ export default {
 
     computed: {
         accounts() {
-            return this.$store.getters.getAccounts;
+            return this.$store.getters.accounts;
         },
 
         accountsNameFilter: {
             get() {
-                return this.$store.getters.getAccountsNameFilter
+                return this.$store.getters.accountsNameFilter
             },
 
             set(filterValue) {
@@ -75,7 +75,7 @@ export default {
 
         accountsTagFilter: {
             get() {
-                return this.$store.getters.getAccountsTagFilter
+                return this.$store.getters.accountsTagFilter
             },
 
             set(filterValue) {

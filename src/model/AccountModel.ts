@@ -21,11 +21,6 @@ export  default class AccountModel {
         return accounts.filter(account => account.id !== accountId);
     }
 
-    public static updateAccount(accounts: Account[], updatedAccount: Account) {
-        const accountIndex = this.getAccountIndex(accounts, updatedAccount);
-        accounts[accountIndex] = updatedAccount;
-    }
-
     public static getAccountIndex(accounts: Account[], accountToFind: Account): number {
         const accountIndex = accounts.findIndex(account => account.id === accountToFind.id);
 

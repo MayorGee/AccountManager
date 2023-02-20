@@ -1,5 +1,3 @@
-import AccountModel from "../model/AccountModel";
-
 const mutations = {
     setAccounts(state, accounts) {
         state.accounts = accounts;
@@ -15,10 +13,6 @@ const mutations = {
 
     addAccount(state, newAccount) {
         state.accounts.push(newAccount);
-    },
-
-    deleteAccount(state, accountToDelete) {
-        state.accounts = AccountModel.deleteAccount(state.accounts, accountToDelete.id);
     },
 
     setAccountNameFilter(state, filterValue) {

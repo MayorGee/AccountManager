@@ -20,7 +20,9 @@ const actions = {
     },
 
     async deleteAccount({ commit }, accountToDelete) {
-        commit('deleteAccount', accountToDelete)
+        const accounts = AccountModel.deleteAccount(state.accounts, accountToDelete.id);
+        
+        commit('setAccount', accounts)
     },
 
     async toggleEditAccountForm({ commit }) {
