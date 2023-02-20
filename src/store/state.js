@@ -1,15 +1,9 @@
 const state = {
     accounts: [],
-
-    isEditFormHidden: {
-        type: Boolean,
-        default: true,
-    },
-
-    editAccountFormData: {
-        type: Object,
-        default: {},
-    },
+    accountsNameFilter: '',
+    accountsTagFilter: '',
+    isEditFormHidden: true,
+    editAccountFormData: {},
 }
 
 export default state;

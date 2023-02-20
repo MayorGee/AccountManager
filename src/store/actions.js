@@ -8,25 +8,24 @@ const actions = {
         commit('setAccounts', accounts);
     },
 
-    async addAccount({ state }, submittedAccount) {
+    async addAccount({ commit }, submittedAccount) {
         const newAccount = AccountModel.addIdToAccount(submittedAccount);
-        AccountModel.resetAccount(submittedAccount);
-        AccountModel.addAccount(state.accounts, newAccount);
+
+        commit('addAccount', newAccount);
     },
 
     async editAccount({ commit }, accountToEdit) {
-        commit('showEditForm');
+        commit('toggleEditForm');
         commit('setEditFormData', accountToEdit);
     },
 
-    async deleteAccount({ state }, accountToDelete) {
-        state.accounts = AccountModel.deleteAccount(state.accounts, accountToDelete.id);
+    async deleteAccount({ commit }, accountToDelete) {
+        commit('deleteAccount', accountToDelete)
     },
 
-    async hideEditAccountForm({ commit }) {
-        commit('hideEditAccountForm')
+    async toggleEditAccountForm({ commit }) {
+        commit('toggleEditForm')
     }
-
 }
 
 export default actions;

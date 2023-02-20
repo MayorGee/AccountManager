@@ -41,16 +41,13 @@ import AccountList from './AccountList.vue';
 import Input from '../components/Input.vue';
 import AddAccountForm from '../components/AddAccountForm.vue';
 import EditAccountForm from '../components/EditAccountForm.vue';
-import AccountModel from '../model/AccountModel';
 
 export default {
     name: 'AccountsHandler',
 
     data() {
-        return {            
-            accountsNameFilter: '',
-            accountsTagFilter: '',
-            tagOptions: ['Friend', 'Relative', 'Colleague']
+        return {
+            tagOptions: ['Friend', 'Relative', 'Colleague'],
         }
     },
 
@@ -63,25 +60,35 @@ export default {
 
     computed: {
         accounts() {
-            const allAccounts = this.$store.getters.getAccounts;
+            return this.$store.getters.getAccounts;
+        },
 
-            if (this.accountsNameFilter) {
-                return AccountModel.filterAccountsByName(allAccounts, this.accountsNameFilter);
+        accountsNameFilter: {
+            get() {
+                return this.$store.getters.getAccountsNameFilter
+            },
+
+            set(filterValue) {
+                this.$store.commit('setAccountNameFilter', filterValue)
             }
+        },
 
-            if (this.accountsTagFilter) {
-                return AccountModel.filterAccountsByTag(allAccounts, this.accountsTagFilter);
+        accountsTagFilter: {
+            get() {
+                return this.$store.getters.getAccountsTagFilter
+            },
+
+            set(filterValue) {
+                this.$store.commit('setAccountTagFilter', filterValue)
             }
-
-            return allAccounts;
         },
 
         isEditFormHidden() {
-            return this.$store.state.isEditFormHidden
+            return this.$store.getters.isEditFormHidden
         }
-    }
-
+    },
 }
+
 </script>
 
 <style lang="scss" scoped>

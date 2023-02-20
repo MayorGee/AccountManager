@@ -8,6 +8,7 @@
 
 <script>
 import AccountForm from '../components/AccountForm.vue';
+import AccountModel from '../model/AccountModel';
 
 export default {
     name: 'AddAccountForm',
@@ -19,6 +20,7 @@ export default {
     methods: {
         submit(submittedAccount) {
             this.$store.dispatch('addAccount', submittedAccount);
+            AccountModel.resetAccount(submittedAccount);
         }
     }
 }

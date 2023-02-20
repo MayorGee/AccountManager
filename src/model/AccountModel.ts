@@ -21,10 +21,6 @@ export  default class AccountModel {
         return accounts.filter(account => account.id !== accountId);
     }
 
-    public static addAccount(accounts: Account[], newAccount: Account) {
-        accounts.push(newAccount);
-    }
-
     public static updateAccount(accounts: Account[], updatedAccount: Account) {
         const accountIndex = this.getAccountIndex(accounts, updatedAccount);
         accounts[accountIndex] = updatedAccount;

@@ -19,7 +19,7 @@ export default {
 
     methods: {
         editFormSubmit() {
-            this.$store.dispatch('hideEditAccountForm')
+            this.$store.dispatch('toggleEditAccountForm')
         },
     },
 
