@@ -26,36 +26,33 @@
     </li>                                    
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+import { Account } from '../abstracts/common';
 import AccountModel from '../model/AccountModel';
 
-export default {
-    name: 'Account',
+@Component
+export default class AccountItem extends Vue {
+    public name = 'AccountItem';
 
-    props: {
-        account: {
-            default: {},
-            require: true,
-            type: Object
+    @Prop({ default: {}, required: true }) account: Account
+
+    @Action('editAccount') actionEditAccount: Function
+    @Action('deleteAccount') actionDeleteAccount: Function
+
+    editAccount() {
+        this.actionEditAccount(this.account)
+    }
+    
+    deleteAccount() {
+        if (confirm('Are you sure you want to delete this account?')) {
+            this.actionDeleteAccount(this.account)
         }
-    },
+    }
 
-    methods: {
-        editAccount() {
-            this.$store.dispatch('editAccount', this.account)
-        },
-
-        deleteAccount() {
-            if (confirm('Are you sure you want to delete this account?')) {
-                this.$store.dispatch('deleteAccount', this.account)
-            }
-        },
-    },
-
-    computed: {
-        fullName() {
-            return AccountModel.getAccountFullname(this.account)
-        }
+    get fullName() {
+        return AccountModel.getAccountFullname(this.account)
     }
 }
 </script>

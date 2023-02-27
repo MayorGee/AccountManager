@@ -1,7 +1,8 @@
 import AccountModel from '../model/AccountModel';
+import { State } from './types';
 
 const getters = {
-    accounts(state) {
+    accounts(state: State) {
         if (state.accountsNameFilter) {
             return AccountModel.filterAccountsByName(state.accounts, state.accountsNameFilter);
         }
@@ -13,19 +14,19 @@ const getters = {
         return state.accounts;
     },
 
-    editAccountFormData(state) {
+    editAccountFormData(state: State) {
         return state.editAccountFormData;
     },
 
-    accountsNameFilter(state) {
+    accountsNameFilter(state: State) {
         return state.accountsNameFilter;
     },
 
-    isEditFormHidden(state) {
+    isEditFormHidden(state: State) {
         return state.isEditFormHidden;
     },
 
-    accountsTagFilter(state) {
+    accountsTagFilter(state: State) {
         return state.accountsTagFilter;
     }
 }

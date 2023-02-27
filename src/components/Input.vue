@@ -11,7 +11,7 @@
         <input 
             :type="type" 
             id="for" 
-            :name="name"
+            :name="inputName"
             :class="`input__frame ${className}`"
             :placeholder="placeholder"
             :value="value"
@@ -20,39 +20,24 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Input',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-    props: {
-        type: {
-            default: 'text',
-            require: true,
-            type: String
-        },
+@Component
+export default class Input extends Vue {
+    public name = 'Input';
 
-        className: {
-            default: '',
-            require: false,
-            type: String
-        },
-        
-        placeholder: {
-            default: '',
-            require: false,
-            type: String
-        },
-         
-        label: String,
-        inputFor: String,
-        name: String,
-        value: String | Number
-    },
+    @Prop({ default: 'text', required: false }) type: string;
+    @Prop({ default: '', required: false }) className: string;
+    @Prop({ default: '', required: false }) placeholder: string;
+    @Prop() label: string;
+    @Prop() inputFor: string;
+    @Prop() inputName: string;
+    @Prop() value: Number | string;
 
-    methods: {
-        input(ev) {
-            this.$emit('input', ev.target.value)
-        }
+    input(ev: Event) {
+        const value = (ev.target as HTMLInputElement).value;
+        this.$emit('input', value)
     }
 }
 </script>

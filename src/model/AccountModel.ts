@@ -1,7 +1,7 @@
 import { Account } from '../abstracts/common';
 
 export  default class AccountModel {
-    public static getAccountFullname(account: Account): String {
+    public static getAccountFullname(account: Account): string {
         return account.firstName + ' ' + account.lastName;
     }
 

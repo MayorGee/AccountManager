@@ -6,22 +6,26 @@
     />
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+import { Account } from '../abstracts/common';
 import AccountForm from '../components/AccountForm.vue';
 import AccountModel from '../model/AccountModel';
 
-export default {
-    name: 'AddAccountForm',
-
+@Component({
     components: {
         AccountForm
-    },
+    }
+})
+export default class AddAccountForm extends Vue {
+    public name = 'AddAccountForm';
 
-    methods: {
-        submit(submittedAccount) {
-            this.$store.dispatch('addAccount', submittedAccount);
-            AccountModel.resetAccount(submittedAccount);
-        }
+    @Action('addAccount') actionAddAccount: Function
+
+    submit(submittedAccount: Account) {
+        this.actionAddAccount(submittedAccount);
+        AccountModel.resetAccount(submittedAccount);
     }
 }
 </script>

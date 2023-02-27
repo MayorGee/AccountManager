@@ -11,14 +11,15 @@
     </a>
 </template>
 
-<script>
-export default {
-    name: 'SocialIcon',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-    props: {
-        src: String,
-        alt: String
-    }
+@Component
+export default class SocialIcon extends Vue {
+    public name = 'SocialIcon'
+
+    @Prop() src: string
+    @Prop() alt: string
 }
 </script>
 

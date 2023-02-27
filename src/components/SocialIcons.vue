@@ -9,38 +9,20 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import SocialIcon from '../components/SocialIcon.vue';
+import socialIconsData from '../data/socialIconsData';
 
-export default {
-    name: 'SocialIcons',
-
-    data() {
-        return {
-            socialIcons: [
-                { 
-                    src: 'fb-logo.svg',
-                    alt: 'Facebook icon'
-                },
-                { 
-                    src: 'instagram-logo.svg',
-                    alt: 'Instagram icon'
-                },
-                { 
-                    src: 'whatsapp-logo.svg',
-                    alt: 'Whatsapp icon'
-                },
-                { 
-                    src: 'linkedIn-logo.svg',
-                    alt: 'LinkedIn icon'
-                },
-            ]
-        }
-    },
-
+@Component({
     components: {
         SocialIcon
-    },
+    }
+})
+export default class SocialIcons extends Vue {
+    public name = 'SocialIcons';
+
+    public socialIcons = socialIconsData
 }
 </script>
 

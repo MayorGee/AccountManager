@@ -4,9 +4,12 @@
     </header>
 </template>
 
-<script>
-export default {
-    name: 'Header'
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class Header extends Vue {
+    public name = 'Header';
 }
 </script>
 

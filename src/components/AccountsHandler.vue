@@ -36,57 +36,58 @@
     </div>
 </template>
 
-<script>
-import AccountList from './AccountList.vue';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import { Getter } from 'vuex-class';
+import AccountList from '../components/AccountList.vue';
 import Input from '../components/Input.vue';
 import AddAccountForm from '../components/AddAccountForm.vue';
 import EditAccountForm from '../components/EditAccountForm.vue';
+import accountTags from '../data/accountTags';
 
-export default {
-    name: 'AccountsHandler',
-
-    data() {
-        return {
-            tagOptions: ['Friend', 'Relative', 'Colleague'],
-        }
-    },
-
+@Component({
     components: {
         AccountList,
         Input,
         AddAccountForm,
         EditAccountForm
-    },
+    }
+})
+export default class AccountsHandler extends Vue {
+    public name = 'AccountsHandler';
 
-    computed: {
-        accounts() {
-            return this.$store.getters.accounts;
-        },
+    @Getter('accounts') getterAccounts: Function;
+    @Getter('accountsNameFilter') getterAccountsNameFilter: Function;
+    @Getter('accountsTagFilter') getterAccountsTagFilter: Function;
+    @Getter('isEditFormHidden') getterIsEditFormHidden: Function;
 
-        accountsNameFilter: {
-            get() {
-                return this.$store.getters.accountsNameFilter
-            },
+    get tagOptions() {
+        return accountTags;
+    } 
 
-            set(filterValue) {
-                this.$store.commit('setAccountNameFilter', filterValue)
-            }
-        },
+    get accounts() {
+        return this.getterAccounts;
+    }
 
-        accountsTagFilter: {
-            get() {
-                return this.$store.getters.accountsTagFilter
-            },
+    get accountsNameFilter() {
+       return this.getterAccountsNameFilter;
+    }
 
-            set(filterValue) {
-                this.$store.commit('setAccountTagFilter', filterValue)
-            }
-        },
+    set accountsNameFilter(filterValue) {
+        this.$store.commit('setAccountNameFilter', filterValue)
+    }
 
-        isEditFormHidden() {
-            return this.$store.getters.isEditFormHidden
-        }
-    },
+    get accountsTagFilter() {
+        return this.getterAccountsTagFilter
+    }
+
+    set accountsTagFilter(filterValue) {
+        this.$store.commit('setAccountTagFilter', filterValue)
+    }
+
+    get isEditFormHidden() {
+        return this.getterIsEditFormHidden
+    }
 }
 
 </script>

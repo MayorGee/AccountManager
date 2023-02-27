@@ -9,26 +9,18 @@
     </li>
 </template>
 
-<script>
-export default {
-    name: 'LinkListItem',
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
-    props: {
-        linkClass: String,
+@Component
+export default class LinkListItem extends Vue {
+    public name = 'LinkListItem';
 
-        href: {
-            default: '',
-            require: false,
-            type: String
-        },
-
-        textContent: {
-            default: 'link',
-            require: true,
-            type: String
-        }
-    },
+    @Prop() linkClass: string;
+    @Prop({ default: '', required: false }) href: string
+    @Prop({ default: 'link', required: true }) textContent: string
 }
+
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
 <template>
     <ul class="account-list">
-        <Account 
+        <AccountItem 
             v-for="account in accounts"
             :key="account.id"
             :account="account"
@@ -9,23 +9,20 @@
     </ul>                                     
 </template>
 
-<script>
-import Account from '../components/Account.vue';
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Account } from '../abstracts/common';
+import AccountItem from '../components/AccountItem.vue';
 
-export default {
-    name: 'AccountList',
-
+@Component({
     components: {
-        Account
-    },
+        AccountItem
+    }
+})
+export default class AccountList extends Vue {
+    public name = 'AccountList';
 
-    props: {
-        accounts: {
-            default: () => [],
-            require: true,
-            type: Array
-        }
-    },
+    @Prop({ default: () => [], required: true }) accounts: Account[]
 }
 </script>
 

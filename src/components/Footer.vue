@@ -14,17 +14,19 @@
     </footer>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import FooterNav from '../components/FooterNav.vue';
 import SocialIcons from '../components/SocialIcons.vue';
 
-export default {
-    name: 'Footer',
-
+@Component({
     components: {
         FooterNav,
         SocialIcons
-    },
+    }
+})
+export default class Footer extends Vue {
+    public name = 'Footer';
 }
 </script>
 

@@ -50,44 +50,35 @@
     </form>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Prop, Component } from 'vue-property-decorator';
+import { Account } from '../abstracts/common';
 import Input from '../components/Input.vue';
-import AccountModel from '../model/AccountModel';
 
-export default {
-    name: 'AccountForm',
-
-    data() {
-        return {
-            accountFormData: {
-                id: '',
-                firstName: '',
-                lastName: '',
-                avatar: '',
-                tag: ''
-            }
-        }
-    },
-
-    props: {
-        editAccountFormData: Object,
-        info: String,
-        btnText: String,
-        hideId: {
-            type: Boolean,
-            default: true
-        }
-    },
-
+@Component({
     components: {
         Input
-    },
+    }
+})
+export default class AccountForm extends Vue {
+    public name = 'AccountForm';
 
-    methods: {
-        submit() {
-            this.$emit('submit', this.accountFormData);
-        },
-    },
+    public accountFormData: Account = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        avatar: '',
+        tag: ''
+    };
+
+    @Prop() editAccountFormData: Account;
+    @Prop() info: string;
+    @Prop() btnText: string;
+    @Prop({ default: true }) hideId: Boolean
+
+    submit() {
+        this.$emit('submit', this.accountFormData);
+    }
 
     mounted() {
         if (this.editAccountFormData) {

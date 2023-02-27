@@ -6,18 +6,20 @@
     </div>
 </template>
 
-<script>
-    import Header from '../components/Header.vue';
-    import AccountsHandler from '../components/AccountsHandler.vue';
-    import Footer from '../components/Footer.vue';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import Header from '../components/Header.vue';
+import AccountsHandler from '../components/AccountsHandler.vue';
+import Footer from '../components/Footer.vue';
 
-    export default {
-        name: 'AccountManager',
-
-        components: {
-            Header,
-            AccountsHandler,
-            Footer,
-        }
+@Component({
+    components: {
+        Header,
+        AccountsHandler,
+        Footer,
     }
+})
+export default class AccountManager extends Vue {
+    public name = 'AccountManager';
+}
 </script>

@@ -13,21 +13,19 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 import LinkListItem from '../components/LinkListItem.vue';
 
-export default {
-    name: 'FooterNav',
-
+@Component({
     components: {
         LinkListItem
-    },
-
-    data() {
-        return  {
-            footerLinks: ['Home', 'About', 'Contact', 'Blog']
-        }
     }
+})
+export default class FooterNav extends Vue {
+    public name = 'FooterNav';
+
+    public footerLinks = ['Home', 'About', 'Contact', 'Blog'];
 }
 </script>
 

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NODE_ENV = process.env.NODE_ENV;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const setPath = function (folderName) {
     return path.join(__dirname, folderName);
@@ -76,6 +77,7 @@ const config = {
                 }
             ]
         ),
+        new VueLoaderPlugin()
     ],
     module: {
         rules: [
@@ -95,7 +97,11 @@ const config = {
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                loader: 'ts-loader'
+                loader: 'ts-loader',
+                options: {
+                    appendTsSuffixTo: [/\.vue$/],
+                }
+
             },
             {
                 test: /\.js$/,
