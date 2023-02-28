@@ -16,6 +16,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import LinkListItem from '../components/LinkListItem.vue';
+import FOOTER_LINKS from '../data/FooterLinks'
 
 @Component({
     components: {
@@ -23,9 +24,9 @@ import LinkListItem from '../components/LinkListItem.vue';
     }
 })
 export default class FooterNav extends Vue {
-    public name = 'FooterNav';
+    public name: string = 'FooterNav';
 
-    public footerLinks = ['Home', 'About', 'Contact', 'Blog'];
+    public footerLinks = FOOTER_LINKS;
 }
 </script>
 

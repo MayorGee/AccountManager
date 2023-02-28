@@ -61,7 +61,7 @@ import Input from '../components/Input.vue';
     }
 })
 export default class AccountForm extends Vue {
-    public name = 'AccountForm';
+    public name: string = 'AccountForm';
 
     public accountFormData: Account = {
         id: '',

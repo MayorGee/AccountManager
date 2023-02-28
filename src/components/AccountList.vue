@@ -20,7 +20,7 @@ import AccountItem from '../components/AccountItem.vue';
     }
 })
 export default class AccountList extends Vue {
-    public name = 'AccountList';
+    public name: string = 'AccountList';
 
     @Prop({ default: () => [], required: true }) accounts: Account[]
 }

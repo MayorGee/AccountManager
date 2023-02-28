@@ -16,7 +16,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class SocialIcon extends Vue {
-    public name = 'SocialIcon'
+    public name: string = 'SocialIcon'
 
     @Prop() src: string
     @Prop() alt: string

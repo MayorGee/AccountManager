@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import SocialIcon from '../components/SocialIcon.vue';
-import socialIconsData from '../data/socialIconsData';
+import SOCIAL_ICONS from '../data/SocialIcons';
 
 @Component({
     components: {
@@ -20,9 +20,9 @@ import socialIconsData from '../data/socialIconsData';
     }
 })
 export default class SocialIcons extends Vue {
-    public name = 'SocialIcons';
+    public name: string = 'SocialIcons';
 
-    public socialIcons = socialIconsData
+    public socialIcons = SOCIAL_ICONS
 }
 </script>
 

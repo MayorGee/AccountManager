@@ -14,7 +14,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class LinkListItem extends Vue {
-    public name = 'LinkListItem';
+    public name: string = 'LinkListItem';
 
     @Prop() linkClass: string;
     @Prop({ default: '', required: false }) href: string

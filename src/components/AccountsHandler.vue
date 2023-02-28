@@ -43,7 +43,7 @@ import AccountList from '../components/AccountList.vue';
 import Input from '../components/Input.vue';
 import AddAccountForm from '../components/AddAccountForm.vue';
 import EditAccountForm from '../components/EditAccountForm.vue';
-import accountTags from '../data/accountTags';
+import ACCOUNT_TAGS from '../data/AccountTags';
 
 @Component({
     components: {
@@ -54,7 +54,7 @@ import accountTags from '../data/accountTags';
     }
 })
 export default class AccountsHandler extends Vue {
-    public name = 'AccountsHandler';
+    public name: string = 'AccountsHandler';
 
     @Getter('accounts') getterAccounts: Function;
     @Getter('accountsNameFilter') getterAccountsNameFilter: Function;
@@ -62,7 +62,7 @@ export default class AccountsHandler extends Vue {
     @Getter('isEditFormHidden') getterIsEditFormHidden: Function;
 
     get tagOptions() {
-        return accountTags;
+        return ACCOUNT_TAGS;
     } 
 
     get accounts() {

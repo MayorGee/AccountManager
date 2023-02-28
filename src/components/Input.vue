@@ -25,7 +25,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Input extends Vue {
-    public name = 'Input';
+    public name: string = 'Input';
 
     @Prop({ default: 'text', required: false }) type: string;
     @Prop({ default: '', required: false }) className: string;

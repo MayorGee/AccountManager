@@ -27,14 +27,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
-import { Account } from '../abstracts/common';
+import { Account, MessageType } from '../abstracts/common';
+import LoggerMixin from '../mixins/logger';
 import AccountModel from '../model/AccountModel';
 
 @Component
-export default class AccountItem extends Vue {
-    public name = 'AccountItem';
+export default class AccountItem extends LoggerMixin {
+    public name: string = 'AccountItem';
 
     @Prop({ default: {}, required: true }) account: Account
 
@@ -46,9 +47,21 @@ export default class AccountItem extends Vue {
     }
     
     deleteAccount() {
-        if (confirm('Are you sure you want to delete this account?')) {
-            this.actionDeleteAccount(this.account)
-        }
+        try {
+            if (confirm('Are you sure you want to delete this account?')) {
+                this.actionDeleteAccount(this.account)
+            }
+            
+            this.logger({
+                type: MessageType.success,
+                message: 'Account Deleted'
+            })
+        } catch(error: any) {
+            this.logger({
+                type: MessageType.failed,
+                message: error.message
+            })
+        }        
     }
 
     get fullName() {

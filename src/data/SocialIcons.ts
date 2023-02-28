@@ -1,4 +1,4 @@
-const socialIconsData = [
+const SOCIAL_ICONS = [
     { 
         src: 'fb-logo.svg',
         alt: 'Facebook icon'
@@ -17,4 +17,4 @@ const socialIconsData = [
     },
 ]
 
-export default socialIconsData;
+export default SOCIAL_ICONS;

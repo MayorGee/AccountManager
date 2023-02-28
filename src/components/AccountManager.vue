@@ -20,6 +20,6 @@ import Footer from '../components/Footer.vue';
     }
 })
 export default class AccountManager extends Vue {
-    public name = 'AccountManager';
+    public name: string = 'AccountManager';
 }
 </script>

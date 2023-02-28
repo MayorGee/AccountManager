@@ -26,7 +26,7 @@ import SocialIcons from '../components/SocialIcons.vue';
     }
 })
 export default class Footer extends Vue {
-    public name = 'Footer';
+    public name: string = 'Footer';
 }
 </script>
 
