@@ -13,13 +13,13 @@
         </span>
         <button
             class="account__edit-button"
-            @click="editAccount"
+            @click="handleEditAccount"
         >
             Edit
         </button>
         <button 
             class="account__delete-button"
-            @click="deleteAccount"
+            @click="handleDeleteAccount"
         >
             Delete
         </button>
@@ -29,7 +29,8 @@
 <script lang="ts">
 import { Component, Prop } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
-import { Account, MessageType } from '../abstracts/common';
+import { MessageType } from '../abstracts/Enum';
+import { Account } from '../abstracts/Interface';
 import LoggerMixin from '../mixins/logger';
 import AccountModel from '../model/AccountModel';
 
@@ -37,19 +38,19 @@ import AccountModel from '../model/AccountModel';
 export default class AccountItem extends LoggerMixin {
     public name: string = 'AccountItem';
 
-    @Prop({ default: {}, required: true }) account: Account
+    @Prop({ required: true }) account: Account
 
-    @Action('editAccount') actionEditAccount: Function
-    @Action('deleteAccount') actionDeleteAccount: Function
+    @Action('editAccount') editAccount: Function
+    @Action('deleteAccount') deleteAccount: Function
 
-    editAccount() {
-        this.actionEditAccount(this.account)
+    handleEditAccount() {
+        this.editAccount(this.account)
     }
     
-    deleteAccount() {
+    handleDeleteAccount() {
         try {
             if (confirm('Are you sure you want to delete this account?')) {
-                this.actionDeleteAccount(this.account)
+                this.deleteAccount(this.account)
             }
             
             this.logger({
@@ -64,7 +65,7 @@ export default class AccountItem extends LoggerMixin {
         }        
     }
 
-    get fullName() {
+    get fullName(): string {
         return AccountModel.getAccountFullname(this.account)
     }
 }

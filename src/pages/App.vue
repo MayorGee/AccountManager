@@ -15,10 +15,10 @@ import AccountManager from '../components/AccountManager.vue';
 export default class App extends Vue {
     public name = 'App';
 
-    @Action('loadAccounts') actionLoadAccounts: Function;
+    @Action('loadAccounts') loadAccounts: Function;
 
     async created() {
-        this.actionLoadAccounts();
+        this.loadAccounts();
     }
 }
 

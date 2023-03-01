@@ -3,16 +3,16 @@
         <SocialIcon
             v-for="(socialIcon, index) in socialIcons" 
             :key="index"
-            :src="socialIcon.src"
-            :alt="socialIcon.alt"
+            :iconAttributes="socialIcon"
         />               
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { SOCIAL_ICONS } from '../abstracts/common';
+import { IconAttributes } from '../abstracts/Interface';
 import SocialIcon from '../components/SocialIcon.vue';
-import SOCIAL_ICONS from '../data/SocialIcons';
 
 @Component({
     components: {
@@ -22,7 +22,7 @@ import SOCIAL_ICONS from '../data/SocialIcons';
 export default class SocialIcons extends Vue {
     public name: string = 'SocialIcons';
 
-    public socialIcons = SOCIAL_ICONS
+    public socialIcons: IconAttributes[] = SOCIAL_ICONS
 }
 </script>
 

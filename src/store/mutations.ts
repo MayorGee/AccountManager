@@ -1,4 +1,4 @@
-import { Account } from '../abstracts/common';
+import { Account } from '../abstracts/Interface';
 import { State } from './types';
 
 const mutations = {
@@ -18,11 +18,11 @@ const mutations = {
         state.accounts.push(newAccount);
     },
 
-    setAccountNameFilter(state: State, filterValue: string) {
+    setAccountsNameFilter(state: State, filterValue: string) {
         state.accountsNameFilter = filterValue;
     },
 
-    setAccountTagFilter(state: State, filterValue: string) {
+    setAccountsTagFilter(state: State, filterValue: string) {
         state.accountsTagFilter = filterValue;
     }
 }

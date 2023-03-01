@@ -9,7 +9,8 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
-import { Account, MessageType } from '../abstracts/common';
+import { MessageType } from '../abstracts/Enum';
+import { Account } from '../abstracts/Interface';
 import AccountForm from '../components/AccountForm.vue';
 import AccountModel from '../model/AccountModel';
 import LoggerMixin from '../mixins/logger';
@@ -22,11 +23,11 @@ import LoggerMixin from '../mixins/logger';
 export default class AddAccountForm extends LoggerMixin {
     public name: string = 'AddAccountForm';
 
-    @Action('addAccount') actionAddAccount: Function
+    @Action('addAccount') addAccount: Function
 
     submit(submittedAccount: Account) {
         try {
-            this.actionAddAccount(submittedAccount);
+            this.addAccount(submittedAccount);
             AccountModel.resetAccount(submittedAccount);
             
             this.logger({

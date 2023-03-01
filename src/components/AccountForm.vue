@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from 'vue-property-decorator';
-import { Account } from '../abstracts/common';
+import { Account } from '../abstracts/Interface';
 import Input from '../components/Input.vue';
 
 @Component({

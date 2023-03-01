@@ -1,23 +1,24 @@
 import { Vue, Component } from 'vue-property-decorator';
-import { LogMessage, MessageType } from '../abstracts/common';
+import { MessageType } from '../abstracts/Enum';
+import { LogMessage } from '../abstracts/Interface';
 
 @Component
-export default class LoggerMixin  extends Vue {
+export default class LoggerMixin extends Vue {
     logger({ type, message }: LogMessage) {
         if (type === MessageType.success) {
-            this.successMessage(message);
+            this.logSuccessMessage(message);
         }
 
         if (type === MessageType.failed) {
-            this.failureMessage(message);
+            this.logFailureMessage(message);
         }
     }
 
-    successMessage(message: string) {
+    logSuccessMessage(message: string) {
         console.log('SUCCESS! ', message);
     }
 
-    failureMessage(message: string) {
+    logFailureMessage(message: string) {
         console.log('FAILED! ', message);
     }
 }

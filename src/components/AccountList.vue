@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { Account } from '../abstracts/common';
+import { Account } from '../abstracts/Interface';
 import AccountItem from '../components/AccountItem.vue';
 
 @Component({

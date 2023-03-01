@@ -1,17 +1,23 @@
-export interface Account {
-    id: string,
-    firstName: string,
-    lastName: string,
-    avatar: string,
-    tag: string
-}
+import { IconAttributes } from "./Interface";
 
-export interface LogMessage {
-    type: string,
-    message: string
-}
+export const FOOTER_LINKS: string[] = ['Home', 'About', 'Contact', 'Blog'];
+export const ACCOUNT_TAGS: string[] = ['Friend', 'Relative', 'Colleague'];
 
-export enum MessageType {
-    success = 'success',
-    failed = 'failed'
-}
+export const SOCIAL_ICONS: IconAttributes[] = [
+    { 
+        src: 'fb-logo.svg',
+        alt: 'Facebook icon'
+    },
+    { 
+        src: 'instagram-logo.svg',
+        alt: 'Instagram icon'
+    },
+    { 
+        src: 'whatsapp-logo.svg',
+        alt: 'Whatsapp icon'
+    },
+    { 
+        src: 'linkedIn-logo.svg',
+        alt: 'LinkedIn icon'
+    },
+]

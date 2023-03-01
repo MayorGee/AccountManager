@@ -1,4 +1,4 @@
-import { Account } from '../abstracts/common';
+import { Account } from '../abstracts/Interface';
 
 export interface State {
     accounts: Account[],

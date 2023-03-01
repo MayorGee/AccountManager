@@ -4,8 +4,8 @@
         class="social-icon"
     >
         <img 
-            :src="`assets/icons/${src}`" 
-            :alt="alt"
+            :src="`assets/icons/${iconAttributes.src}`" 
+            :alt="iconAttributes.alt"
             class="social-icon__img" 
         />
     </a>
@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
+import { IconAttributes } from '../abstracts/Interface';
 
 @Component
 export default class SocialIcon extends Vue {
     public name: string = 'SocialIcon'
 
-    @Prop() src: string
-    @Prop() alt: string
+    @Prop() iconAttributes: IconAttributes
 }
 </script>
 

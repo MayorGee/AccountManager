@@ -10,9 +10,9 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 import { Getter, Action } from 'vuex-class';
+import { MessageType } from '../abstracts/Enum';
 import AccountForm from '../components/AccountForm.vue';
 import LoggerMixin from '../mixins/logger';
-import { MessageType } from '../abstracts/common';
 
 @Component({
     components: {
@@ -22,12 +22,12 @@ import { MessageType } from '../abstracts/common';
 export default class EditAccountForm extends LoggerMixin {
     public name: string = 'EditAccountForm';
 
-    @Action('toggleEditAccountForm') actionToggleEditAccountForm: Function
-    @Getter('editAccountFormData') getterEditAccountFormData: Function;
+    @Action('toggleEditAccountForm') toggleEditAccountForm: Function
+    @Getter('editAccountFormData') accountFormData: Function;
 
     public submit() {
         try {
-            this.actionToggleEditAccountForm();
+            this.toggleEditAccountForm();
             this.logger({
                 type: MessageType.success,
                 message: 'Account Edited'
@@ -38,10 +38,6 @@ export default class EditAccountForm extends LoggerMixin {
                 message: error.message
             })
         }
-    }
-
-    get accountFormData() {
-        return this.getterEditAccountFormData
     }
 }
 </script>

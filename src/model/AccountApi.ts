@@ -1,4 +1,5 @@
-import { Account } from '../abstracts/common';
+
+import { Account } from '../abstracts/Interface';
 import FetchClient from './FetchClient';
 
 export  default class AccountApi {
